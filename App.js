@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
   { id: '3', name: 'Cherry' },
   { id: '4', name: 'Date' },
   { id: '5', name: 'Grapes' },
+  { id: '6', name: 'strawberry' },
 ];
 
 export default function App() {
@@ -29,8 +30,10 @@ export default function App() {
       const cachedData = await AsyncStorage.getItem(`search-${input.toLowerCase()}`);
 
       if (cachedData) {
+        console.log("cachedData", cachedData);       
         setResults(JSON.parse(cachedData));
       } else {
+        console.log("not cached");
         const filteredData = dummyData.filter((item) =>
           item.name.toLowerCase().includes(input.toLowerCase())
         );
@@ -51,12 +54,16 @@ export default function App() {
         value={query}
         onChangeText={setQuery}
       />
-      <FlatList
-        data={results}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
-      />
-      <StatusBar style="auto" />
+      {results.length > 0 ? (
+        <FlatList
+          data={results}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+        />
+      ):(
+          <Text style={styles.noResults}>No results found</Text>
+        )
+      }
     </View>
   );
 }
@@ -64,6 +71,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 50,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
