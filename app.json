@@ -19,10 +19,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yahya_shah_1.MyReactNativeApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4dbae721-c912-4200-8b9e-1011f56192e8"
+      }
+    },
+    "owner": "yahya_shah_1"
   }
 }
